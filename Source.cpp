@@ -231,6 +231,16 @@ void updateStudentDetails()
     }
 }
 
+void studentGPA() {
+    cout << "Input Student's Letter Grades:\n";//this is a function that after choice 8 is selected, asked user to input grades so class gpa can calculate gpa.
+    //Please finish.
+    char grade_Arr[5];
+    for (int i = 0; i < 5; i++) {
+        cin >> grade_Arr[i];
+    }
+    gpa student1(grade_Arr[0], grade_Arr[1], grade_Arr[2], grade_Arr[3], grade_Arr[4]);
+    float stuGPA = student1.calculateGPA();
+}
 int main()
 {
     int choice;
@@ -251,7 +261,10 @@ int main()
 
         cout << "7. Update Student Details by Roll Number\n";
 
-        cout << "8. Exit the program\n";
+        cout << "8. Calcualte Student GPA\n";
+
+        cout << "9. Exit the program\n";
+
 
         cout << "Enter your choice\n";
         cin >> choice;
@@ -286,9 +299,15 @@ int main()
             break;
 
         case 8:
+            studentGPA();
+            break;
+
+        case 9:
             exit(0);
             break;
+            
         }
+
     }
 
     return 0;
