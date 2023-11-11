@@ -7,7 +7,7 @@ struct student {
     string last_name;
     int roll_number;
     double cgpa;
-    int course_id[10];
+    int course_id[5];
 } students[110];
 
 int number_of_students = 0;
@@ -231,16 +231,31 @@ void updateStudentDetails()
     }
 }
 
-void studentGPA() {
-    cout << "Input Student's Letter Grades:\n";//this is a function that after choice 8 is selected, asked user to input grades so class gpa can calculate gpa.
-    //Please finish.
-    char grade_Arr[5];
-    for (int i = 0; i < 5; i++) {
-        cin >> grade_Arr[i];
+float calculatestudentGPA() {
+    cout << "Enter student's roll number: \n";
+    int roll_no;
+    cin >> roll_no;
+    bool found;
+    for (int i = 0; i < number_of_students; i++)
+        if (roll_no == students[i].roll_number)
+            found = true;
+        else
+            return 1;
+    // Finds roll_no of student and checks to see if they exist. May be possible to use with error handling.
+
+    if (found == true) {
+        cout << "Input Student's Letter Grades:\n";//this is a function that after choice 8 is selected, asked user to input grades so class gpa can calculate gpa.
+        //Please finish.
+        char grade_Arr[5];
+        for (int i = 0; i < 5; i++) {
+            cin >> grade_Arr[i];
+        }
+        gpa student1(grade_Arr[0], grade_Arr[1], grade_Arr[2], grade_Arr[3], grade_Arr[4]);
+        float stuGPA = student1.calculateGPA();
+        return stuGPA;
     }
-    gpa student1(grade_Arr[0], grade_Arr[1], grade_Arr[2], grade_Arr[3], grade_Arr[4]);
-    float stuGPA = student1.calculateGPA();
 }
+
 int main()
 {
     int choice;
@@ -299,7 +314,7 @@ int main()
             break;
 
         case 8:
-            studentGPA();
+            calculatestudentGPA();
             break;
 
         case 9:
