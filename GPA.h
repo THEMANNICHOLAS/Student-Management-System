@@ -30,6 +30,6 @@ public:
         gp5 = float(gpaConversion(a5));
     }
     float calculateGPA(){
-        return (gp1 + gp2 + gp3 + gp4+ gp5) / 5 ;
+        return (gp1 + gp2 + gp3 + gp4+ gp5) / ;
     }
 };
