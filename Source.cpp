@@ -1,6 +1,8 @@
 #include<string>
 #include<iostream>
 #include "GPA.h"
+using std::cout;
+using std::cin;
 using namespace std;
 struct student {
     string first_name;
@@ -240,15 +242,27 @@ float calculatestudentGPA() {
         if (roll_no == students[i].roll_number)
             found = true;
         else
+
             return 1;
     // Finds roll_no of student and checks to see if they exist. May be possible to use with error handling.
 
+
     if (found == true) {
-        cout << "Input Student's Letter Grades:\n";//this is a function that after choice 8 is selected, asked user to input grades so class gpa can calculate gpa.
-        //Please finish.
+        cout << "Input Student's Letter Grades:\n";
         char grade_Arr[5];
         for (int i = 0; i < 5; i++) {
-            cin >> grade_Arr[i];
+            cin >> grade_Arr[i];  
+            try {
+                if (grade_Arr[i] != 'a' || 'b' || 'c' || 'd' || 'f') //Checks if letter input is valid; may need to be optimized with capital letter values.
+                    continue;
+                else
+                    throw 1;      
+            }
+            catch (int inputError ) {
+                cout << "Invalid input...\n";
+                cout << "Enter a valid letter grade:\n";
+                cin >> grade_Arr[i];
+            }
         }
         gpa student1(grade_Arr[0], grade_Arr[1], grade_Arr[2], grade_Arr[3], grade_Arr[4]);
         float stuGPA = student1.calculateGPA();
