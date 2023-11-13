@@ -8,9 +8,11 @@ struct student {
     int roll_number;
     double cgpa;
     int course_id[10];
+    char course_id_grades[10];
 } students[110];
 
 int number_of_students = 0;
+
 
 
 void addStudentDetails()
@@ -186,7 +188,8 @@ void updateStudentDetails()
                 "2. update last name\n"
                 "3. update roll number.\n"
                 "4. update CGPA\n"
-                "5. update courses\n";
+                "5. update courses\n"
+                "6. exit\n";
 
             int choice;
             cin >> choice;
@@ -218,6 +221,10 @@ void updateStudentDetails()
                     students[i].course_id[1] >> students[i].course_id[2] >>
                     students[i].course_id[3] >> students[i].course_id[4];
                 break;
+            
+            case 6:
+                return;
+                break;
 
             }
         }
@@ -231,17 +238,19 @@ void updateStudentDetails()
     }
 }
 
-
 float calculatestudentGPA() {
     cout << "Enter student's roll number: \n";
     int roll_no;
     cin >> roll_no;
     bool found;
+    int student_number;
     for (int i = 0; i < number_of_students; i++) {
-        if (students[i].roll_number == roll_no)
+        if (students[i].roll_number == roll_no) {
             found = true;
+            student_number = i;
+        }
         else {
-            cout << "Student not found. Returning to main menu...\n";
+            cout << "Student not found. Returning to main menu...\n\n";
             return 0;
         }
     }
@@ -251,20 +260,64 @@ float calculatestudentGPA() {
         cout << "Input Student's Letter Grades:\n";
         for (int i = 0; i < 5; i++) {
             cin >> grade_Arr[i];
-            grade_Arr[i]=toupper(grade_Arr[i]);
+            students[student_number].course_id_grades[i] = grade_Arr[i];
+            grade_Arr[i] = toupper(grade_Arr[i]);
+
         }
+
+        //Possible to make table/array to link course_ids with grades.
+
+
         gpa student1(grade_Arr[0], grade_Arr[1], grade_Arr[2], grade_Arr[3], grade_Arr[4]);
         float stuGPA = student1.calculateGPA();
-        cout << "Student's GPA is: " << stuGPA<<endl;
-        return stuGPA;
+        cout << "Student's GPA is: " << stuGPA << endl;
+        for (int i = 0; i < number_of_students; i++) {
+            if (students[i].roll_number == roll_no)
+                students[i].cgpa = stuGPA;
 
+
+            return stuGPA;
+
+        }
     }
-
 }
+int showStudentGrades() {
+    cout << "Enter student's roll number: \n";
+    int roll_no;
+    bool found;
+    int student_number;
+    cin >> roll_no;
+    for (int i = 0; i < number_of_students; i++) {
+        if (students[i].roll_number == roll_no) {
+            found = true;
+            student_number = i;
+        }
+        else {
+            cout << "Student not found. Returning to main menu...\n\n";
+            return 0;
+        }
+    }
+    if (found == true) {
+        for (int i = 0; i < 5; i++) {
+            cout << "Course Id: " << students[student_number].course_id[i] << "\n";
+            cout << "Course Grade: " << students[student_number].course_id_grades[i] << "\n";
+        }
+            
+    }
+}
+
+
+        
+
+
+
+
+
 
 
 
 int main(){
+
     int choice;
     while (true) {
         cout << "Choices of the tasks that you want to perform\n";
@@ -285,7 +338,9 @@ int main(){
 
         cout << "8. Calcualte Student GPA\n";
 
-        cout << "9. Exit the program\n";
+        cout << "9. Show Student's Grade\n";
+
+        cout << "10. Exit Program\n";
 
 
         cout << "Enter your choice\n";
@@ -325,6 +380,10 @@ int main(){
             break;
 
         case 9:
+            showStudentGrades();
+            break;
+
+        case 10:
             exit(0);
             break;
             
