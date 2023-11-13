@@ -281,7 +281,7 @@ float calculatestudentGPA() {
         }
     }
 }
-int showStudentGrades() {
+void showStudentGrades() {
     cout << "Enter student's roll number: \n";
     int roll_no;
     bool found;
@@ -294,7 +294,7 @@ int showStudentGrades() {
         }
         else {
             cout << "Student not found. Returning to main menu...\n\n";
-            return 0;
+            return;
         }
     }
     if (found == true) {
