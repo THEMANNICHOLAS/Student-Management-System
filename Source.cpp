@@ -1,15 +1,13 @@
 #include<string>
 #include<iostream>
 #include "GPA.h"
-using std::cout;
-using std::cin;
 using namespace std;
 struct student {
     string first_name;
     string last_name;
     int roll_number;
     double cgpa;
-    int course_id[5];
+    int course_id[10];
 } students[110];
 
 int number_of_students = 0;
@@ -233,50 +231,45 @@ void updateStudentDetails()
     }
 }
 
+
 float calculatestudentGPA() {
     cout << "Enter student's roll number: \n";
     int roll_no;
     cin >> roll_no;
     bool found;
-    for (int i = 0; i < number_of_students; i++)
-        if (roll_no == students[i].roll_number)
+    for (int i = 0; i < number_of_students; i++) {
+        if (students[i].roll_number == roll_no)
             found = true;
-        else
+        else {
+            cout << "Student not found. Returning to main menu...\n";
+            return 0;
+        }
+    }
 
-            return 1;
-    // Finds roll_no of student and checks to see if they exist. May be possible to use with error handling.
-
-
+    char grade_Arr[5];
     if (found == true) {
         cout << "Input Student's Letter Grades:\n";
-        char grade_Arr[5];
         for (int i = 0; i < 5; i++) {
-            cin >> grade_Arr[i];  
-            try {
-                if (grade_Arr[i] != 'a' || 'b' || 'c' || 'd' || 'f') //Checks if letter input is valid; may need to be optimized with capital letter values.
-                    continue;
-                else
-                    throw 1;      
-            }
-            catch (int inputError ) {
-                cout << "Invalid input...\n";
-                cout << "Enter a valid letter grade:\n";
-                cin >> grade_Arr[i];
-            }
+            cin >> grade_Arr[i];
+            grade_Arr[i]=toupper(grade_Arr[i]);
         }
         gpa student1(grade_Arr[0], grade_Arr[1], grade_Arr[2], grade_Arr[3], grade_Arr[4]);
         float stuGPA = student1.calculateGPA();
+        cout << "Student's GPA is: " << stuGPA<<endl;
         return stuGPA;
+
     }
+
 }
 
-int main()
-{
+
+
+int main(){
     int choice;
     while (true) {
         cout << "Choices of the tasks that you want to perform\n";
 
-        cout << "1.Add new Student to the database\n";
+        cout << "1. Add new Student to the database\n";
 
         cout << "2. Search Student by Roll Number\n";
 
