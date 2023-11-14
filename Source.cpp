@@ -302,7 +302,7 @@ void showStudentGrades() {
         for (int i = 0; i < 5; i++) {
             cout << "Course Id: " << students[student_number].course_id[i] << "\n";
             char grade = toupper(students[student_number].course_id_grades[i]);
-            cout << "Course Grade: " << students[student_number].course_id_grades[i] << "\n";
+            cout << "Course Grade: " << grade << "\n";
         }
             
     }
