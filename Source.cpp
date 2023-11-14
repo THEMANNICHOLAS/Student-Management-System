@@ -259,6 +259,7 @@ float calculatestudentGPA() {
     if (found == true) {
         cout << "Input Student's Letter Grades:\n";
         for (int i = 0; i < 5; i++) {
+            cout << "Course ID: " << students[student_number].course_id[i] << "\n";
             cin >> grade_Arr[i];
             students[student_number].course_id_grades[i] = grade_Arr[i];
             grade_Arr[i] = toupper(grade_Arr[i]);
@@ -300,21 +301,12 @@ void showStudentGrades() {
     if (found == true) {
         for (int i = 0; i < 5; i++) {
             cout << "Course Id: " << students[student_number].course_id[i] << "\n";
+            char grade = toupper(students[student_number].course_id_grades[i]);
             cout << "Course Grade: " << students[student_number].course_id_grades[i] << "\n";
         }
             
     }
 }
-
-
-        
-
-
-
-
-
-
-
 
 int main(){
 
