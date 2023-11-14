@@ -71,7 +71,7 @@ void findStudentByRollNumber()
             for (int j = 0; j < 5; j++) {
                 cout << students[i].course_id[j] << " ";
             }
-
+            cout << "\n";
             break;
         }
     }
@@ -260,28 +260,47 @@ float calculatestudentGPA() {
         cout << "Input Student's Letter Grades:\n";
         for (int i = 0; i < 5; i++) {
             cout << "Course ID: " << students[student_number].course_id[i] << "\n";
+            cout << "Grade: ";
             cin >> grade_Arr[i];
-            students[student_number].course_id_grades[i] = grade_Arr[i];
             grade_Arr[i] = toupper(grade_Arr[i]);
+            students[student_number].course_id_grades[i] = grade_Arr[i];
 
-        }
+            while (true) {
+                try {
+                    if (grade_Arr[i] == 'A' || grade_Arr[i] == 'B' || grade_Arr[i] == 'C' || grade_Arr[i] == 'D' || grade_Arr[i] == 'F') {
+                        break;
+                    }
+                    else
+                        throw(1);
+                }
+                catch (int userError) {
+                    cout << "Invalid Input. Please input valid letter grade: \n";
+                    cin >> grade_Arr[i];
+                    grade_Arr[i] = toupper(grade_Arr[i]);
+                    students[student_number].course_id_grades[i] = grade_Arr[i];
+                    
+                }
 
-        //Possible to make table/array to link course_ids with grades.
 
-
-        gpa student1(grade_Arr[0], grade_Arr[1], grade_Arr[2], grade_Arr[3], grade_Arr[4]);
-        float stuGPA = student1.calculateGPA();
-        cout << "Student's GPA is: " << stuGPA << endl;
-        for (int i = 0; i < number_of_students; i++) {
-            if (students[i].roll_number == roll_no)
-                students[i].cgpa = stuGPA;
-
-
-            return stuGPA;
-
+            }
         }
     }
+
+    //Possible to make table/array to link course_ids with grades.
+
+
+    gpa student1(grade_Arr[0], grade_Arr[1], grade_Arr[2], grade_Arr[3], grade_Arr[4]);
+    float stuGPA = student1.calculateGPA();
+    cout << "Student's GPA is: " << stuGPA << endl;
+    for (int i = 0; i < number_of_students; i++) {
+        if (students[i].roll_number == roll_no)
+            students[i].cgpa = stuGPA;
+
+        return stuGPA;
+    }
 }
+
+
 void showStudentGrades() {
     cout << "Enter student's roll number: \n";
     int roll_no;
@@ -328,7 +347,7 @@ int main(){
 
         cout << "7. Update Student Details by Roll Number\n";
 
-        cout << "8. Calcualte Student GPA\n";
+        cout << "8. Calculate Student GPA\n";
 
         cout << "9. Show Student's Grade\n";
 

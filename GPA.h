@@ -32,4 +32,5 @@ public:
     float calculateGPA(){
         return (gp1 + gp2 + gp3 + gp4+ gp5) / 5;
     }
+    ~gpa(){}
 };
